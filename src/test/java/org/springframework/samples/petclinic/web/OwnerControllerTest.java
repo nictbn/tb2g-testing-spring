@@ -27,6 +27,14 @@ class OwnerControllerTest {
     }
 
     @Test
+    void findByNameNotFound() throws Exception {
+        mockMvc.perform(get("/owners")
+                        .param("lastName", "Dont Find Me"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/findOwners"));
+    }
+
+    @Test
     void initCreationFormTest() throws Exception {
         mockMvc.perform(get("/owners/new"))
                 .andExpect(status().isOk())
